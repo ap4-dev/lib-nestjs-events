@@ -1,6 +1,6 @@
 {
   "name": "@ap-dev/nestjs-events",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A NestJS events library with RabbitMQ integration",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
