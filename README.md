@@ -145,6 +145,13 @@ export class InfrastructureService implements OnModuleInit {
       durable: true,
       arguments: { 'x-message-ttl': 60000 },
     });
+
+    // Vincular cola al exchange con routing key
+    await this.eventsService.bindQueueToExchange(
+      'user-notifications',
+      'user-events',
+      'user.*'
+    );
   }
 }
 ```

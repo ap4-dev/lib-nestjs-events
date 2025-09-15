@@ -166,6 +166,23 @@ export class EventsService implements OnModuleInit, OnModuleDestroy {
     await this.channel!.assertExchange(exchangeName, options.type, exchangeOptions);
   }
 
+  // Método para vincular una cola a un exchange
+  async bindQueueToExchange(
+    queueName: string,
+    exchangeName: string,
+    routingKey: string
+  ): Promise<void> {
+    await this.ensureConnection();
+    
+    try {
+      await this.channel!.bindQueue(queueName, exchangeName, routingKey);
+      this.logger.log(`Queue '${queueName}' binded to exchange '${exchangeName}' with routing key '${routingKey}'`);
+    } catch (error) {
+      this.logger.error(`Error binding queue '${queueName}' to exchange '${exchangeName}':`, error);
+      throw error;
+    }
+  }
+  
   // Método para consumir mensajes
   async consume(
     queueName: string,
